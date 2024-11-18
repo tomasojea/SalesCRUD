@@ -19,6 +19,12 @@ public class EmployeeService {
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
+
+    public Integer totalSales(){
+        var totalSales=employeeRepository.totalSales().size();
+
+        return totalSales;
+    }
 //    List<Employee> people = IntStream.rangeClosed(1,100)
 //            .mapToObj(i -> new Employee(
 //                    faker.name().firstName() + "." +faker.name().lastName() + "@email.com",

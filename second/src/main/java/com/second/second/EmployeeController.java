@@ -50,6 +50,12 @@ public class EmployeeController {
          return id + " was deleted";
     }
 
+    @GetMapping("/totalsales")
+    public Integer totalSales(){
+
+        return employeeService.totalSales();
+    }
+
 
 
 }

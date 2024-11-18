@@ -15,5 +15,8 @@ interface EmployeeRepository extends CrudRepository<Employee,Integer>
 
     public List<Employee> findByName(String name);
 
+    @Query("SELECT e.sales from Employee e")
+    public List<Sales> totalSales();
+
 
 }

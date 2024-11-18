@@ -9,4 +9,5 @@ public interface SalesRepository extends CrudRepository<Sales,Integer> {
     public Sales findByid(Integer id);
 
     public List<Sales> findAll();
+
 }
