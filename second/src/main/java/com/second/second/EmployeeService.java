@@ -21,9 +21,7 @@ public class EmployeeService {
     }
 
     public Integer totalSales(){
-        var totalSales=employeeRepository.totalSales().size();
-
-        return totalSales;
+        return employeeRepository.totalSales().size();
     }
 //    List<Employee> people = IntStream.rangeClosed(1,100)
 //            .mapToObj(i -> new Employee(
