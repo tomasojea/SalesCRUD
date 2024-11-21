@@ -28,8 +28,6 @@ public class Employee {
         this.sales = sales;
     }
 
-
-
     public Employee() {
     }
 

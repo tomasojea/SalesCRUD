@@ -52,9 +52,14 @@ public class EmployeeController {
 
     @GetMapping("/totalsales")
     public Integer totalSales(){
-
         return employeeService.totalSales();
     }
+
+    @GetMapping("/salesperemployee/{id}")
+    public String salesPerEmployee(@PathVariable int id){
+        return employeeService.salesStatus(id);
+    }
+
 
 
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,6 +24,12 @@ public class EmployeeService {
     public Integer totalSales(){
         return employeeRepository.totalSales().size();
     }
+
+    public String salesStatus(int id){
+        return employeeRepository.findById(id).getSales().getFirst().getStatus();
+    }
+
+
 //    List<Employee> people = IntStream.rangeClosed(1,100)
 //            .mapToObj(i -> new Employee(
 //                    faker.name().firstName() + "." +faker.name().lastName() + "@email.com",
@@ -35,9 +42,5 @@ public class EmployeeService {
 //    public void saveAll(){
 //        employeeRepository.saveAll(people);
 //    }
-
-
-
-
 
 }

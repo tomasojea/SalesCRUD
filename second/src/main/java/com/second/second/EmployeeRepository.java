@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 
 interface EmployeeRepository extends CrudRepository<Employee,Integer>
@@ -17,6 +18,8 @@ interface EmployeeRepository extends CrudRepository<Employee,Integer>
 
     @Query("SELECT e.sales from Employee e")
     public List<Sales> totalSales();
+
+    public Employee findById(int id);
 
 
 }
