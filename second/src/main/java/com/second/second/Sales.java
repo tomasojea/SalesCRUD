@@ -13,6 +13,16 @@ public class Sales {
     private String status;
     private String lead;
 
+    public Integer getSale() {
+        return sale;
+    }
+
+    public void setSale(Integer sale) {
+        this.sale = sale;
+    }
+
+    private Integer sale;
+
 
     public Sales() {
     }

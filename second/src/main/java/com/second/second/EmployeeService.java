@@ -33,6 +33,10 @@ public class EmployeeService {
         return employeeRepository.salesStatus();
     }
 
+    public List<totalSalesByStatus> salesByStatusTotal(){
+        return employeeRepository.salesStatusTotal();
+    }
+
 
 //    List<Employee> people = IntStream.rangeClosed(1,100)
 //            .mapToObj(i -> new Employee(

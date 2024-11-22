@@ -8,8 +8,8 @@ import java.util.List;
 @RequestMapping("/")
 public class EmployeeController {
 
-    private  EmployeeRepository employeeRepository;
-    private  EmployeeService employeeService;
+    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
     private SalesRepository salesRepository;
 
     public EmployeeController(EmployeeRepository employeeRepository, EmployeeService employeeService, SalesRepository salesRepository){
@@ -61,9 +61,15 @@ public class EmployeeController {
     }
 
     @GetMapping("/salesbystatus")
-    public List<salesByStatusDTO> salesPerEmployee(){
+    public List<salesByStatusDTO> salesPerstatus(){
         return employeeService.salesByStatus();
     }
+
+    @GetMapping("/salesbystatustotal")
+    public List<totalSalesByStatus> salesPerstatusTotal(){
+        return employeeService.salesByStatusTotal();
+    }
+
 
 
 
