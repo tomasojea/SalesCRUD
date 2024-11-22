@@ -1,15 +1,9 @@
 package com.second.second;
 
 import com.github.javafaker.Faker;
-
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class EmployeeService {
