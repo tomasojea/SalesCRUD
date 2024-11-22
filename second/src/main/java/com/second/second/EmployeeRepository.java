@@ -21,5 +21,7 @@ interface EmployeeRepository extends CrudRepository<Employee,Integer>
 
     public Employee findById(int id);
 
+    @Query("SELECT new com.second.second.salesByStatusDTO(s.status, COUNT(s)) FROM Sales s GROUP BY s.status")
+    public List<salesByStatusDTO> salesStatus();
 
 }

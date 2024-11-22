@@ -60,6 +60,12 @@ public class EmployeeController {
         return employeeService.salesStatus(id);
     }
 
+    @GetMapping("/salesbystatus")
+    public List<salesByStatusDTO> salesPerEmployee(){
+        return employeeService.salesByStatus();
+    }
+
+
 
 
 

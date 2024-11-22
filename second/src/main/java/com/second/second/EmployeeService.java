@@ -29,6 +29,10 @@ public class EmployeeService {
         return employeeRepository.findById(id).getSales().getFirst().getStatus();
     }
 
+    public List<salesByStatusDTO> salesByStatus(){
+        return employeeRepository.salesStatus();
+    }
+
 
 //    List<Employee> people = IntStream.rangeClosed(1,100)
 //            .mapToObj(i -> new Employee(
