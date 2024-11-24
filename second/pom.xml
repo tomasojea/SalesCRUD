@@ -59,6 +59,13 @@
 			<artifactId>javafaker</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.github.spullara.mustache.java</groupId>
+			<artifactId>compiler</artifactId>
+			<version>0.9.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

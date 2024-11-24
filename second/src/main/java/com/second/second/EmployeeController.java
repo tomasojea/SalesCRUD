@@ -1,7 +1,11 @@
 package com.second.second;
 
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.StringWriter;
 import java.util.List;
 
 @RestController
@@ -18,6 +22,34 @@ public class EmployeeController {
         this.salesRepository = salesRepository;
     }
 
+    @GetMapping("/template")
+    public String htmlTemplate(){
+        MustacheFactory mf = new DefaultMustacheFactory();
+        Mustache mustache = mf.compile("C:/Users/Owner/Downloads/second/src/main/resources/template.html");
+
+        StringWriter writer = new StringWriter();
+        mustache.execute(writer, employeeService.salesByStatusTotal());
+        String html = writer.toString();
+        return html;
+
+    }
+
+    @GetMapping("/htmlpage")
+    public String htmlPage(){
+
+        return "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "<title>HTML CSS JS</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<h1 id=\"welcome\">HTML CSS JS</h1>\n" +
+                "<p>Welcome to HTML-CSS-JS.com</p>\n" +
+                "<p>Online HTML, CSS and JavaScript editor \n" +
+                "with instant preview.</p>\n" +
+                "</body>\n" +
+                "</html>";
+    }
 
     @GetMapping("/allemployees")
     public List<Employee> allEmployess(){
@@ -69,9 +101,6 @@ public class EmployeeController {
     public List<totalSalesByStatus> salesPerstatusTotal(){
         return employeeService.salesByStatusTotal();
     }
-
-
-
 
 
 
