@@ -1,15 +1,15 @@
-<table>
+<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align: left;">
     <thead>
-    <tr>
-        <th>Status</th>
-        <th>Total</th>
+    <tr style="background-color: #f4f4f4; border-bottom: 2px solid #ddd;">
+        <th style="padding: 8px; border: 1px solid #ddd;">Status</th>
+        <th style="padding: 8px; border: 1px solid #ddd;">Total</th>
     </tr>
     </thead>
     <tbody>
-    {{#.}}
-    <tr>
-        <td>{{status}}</td>
-        <td>{{total}}</td>
+    {{#.}} <!-- Iterate over the list -->
+    <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 8px; border: 1px solid #ddd;">{{status}}</td>
+        <td style="padding: 8px; border: 1px solid #ddd;">{{total}}</td>
     </tr>
     {{/.}}
     </tbody>
