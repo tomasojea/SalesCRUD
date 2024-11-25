@@ -10,4 +10,5 @@ public interface SalesRepository extends CrudRepository<Sales,Integer> {
 
     public List<Sales> findAll();
 
+    public List<Sales> findSalesByStatus(String status);
 }

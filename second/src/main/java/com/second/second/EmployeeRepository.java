@@ -27,4 +27,5 @@ interface EmployeeRepository extends CrudRepository<Employee,Integer>
     @Query("SELECT new com.second.second.totalSalesByStatus(s.status, SUM(s.sale)) FROM Sales s GROUP BY s.status")
     public List<totalSalesByStatus> salesStatusTotal();
 
+
 }

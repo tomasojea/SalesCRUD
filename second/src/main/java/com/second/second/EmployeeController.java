@@ -37,18 +37,19 @@ public class EmployeeController {
     @GetMapping("/htmlpage")
     public String htmlPage(){
 
-        return "<!DOCTYPE html>\n" +
-                "<html>\n" +
-                "<head>\n" +
-                "<title>HTML CSS JS</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<h1 id=\"welcome\">HTML CSS JS</h1>\n" +
-                "<p>Welcome to HTML-CSS-JS.com</p>\n" +
-                "<p>Online HTML, CSS and JavaScript editor \n" +
-                "with instant preview.</p>\n" +
-                "</body>\n" +
-                "</html>";
+        return """
+                <!DOCTYPE html>\
+                <html>
+                <head>
+                <title>HTML CSS JS</title>
+                </head>
+                <body>
+                <h1 id="welcome">HTML CSS JS</h1>
+                <p>Welcome to HTML-CSS-JS.com</p>
+                <p>Online HTML, CSS and JavaScript editor\s
+                with instant preview.</p>
+                </body>
+                </html>""";
     }
 
     @GetMapping("/allemployees")
@@ -102,6 +103,10 @@ public class EmployeeController {
         return employeeService.salesByStatusTotal();
     }
 
+    @GetMapping("/allsaleswithstatus/{status}")
+    public List<Sales> allSalesWithStatus(@PathVariable String status){
+        return salesRepository.findSalesByStatus(status);
+    }
 
 
 }
