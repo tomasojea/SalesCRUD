@@ -16,6 +16,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
     private SalesRepository salesRepository;
 
+
     public EmployeeController(EmployeeRepository employeeRepository, EmployeeService employeeService, SalesRepository salesRepository){
         this.employeeRepository = employeeRepository;
         this.employeeService = employeeService;
@@ -54,6 +55,7 @@ public class EmployeeController {
 
     @GetMapping("/allemployees")
     public List<Employee> allEmployess(){
+        employeeService.send("quickstart-events","all employees");
         return employeeRepository.findAll();
     }
 
@@ -74,11 +76,13 @@ public class EmployeeController {
 
     @PostMapping("/addemployee")
     public Employee addEmployee(Employee employee){
+
         return employeeRepository.save(employee);
     }
 
     @PostMapping("/deleteemployee")
     public String deleteEmployee(Integer id){
+
          employeeRepository.deleteById(id);
          return id + " was deleted";
     }

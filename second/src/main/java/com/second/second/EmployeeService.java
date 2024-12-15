@@ -1,6 +1,7 @@
 package com.second.second;
 
 import com.github.javafaker.Faker;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,11 +10,15 @@ import java.util.List;
 public class EmployeeService {
 
     private EmployeeRepository employeeRepository;
+    private KafkaTemplate<String, String> kafkaTemplate;
 //    private Faker faker = new Faker();
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, KafkaTemplate<String, String> kafkaTemplate) {
         this.employeeRepository = employeeRepository;
+        this.kafkaTemplate = kafkaTemplate;
     }
+
+
 
     public Integer totalSales(){
         return employeeRepository.totalSales().size();
@@ -29,6 +34,19 @@ public class EmployeeService {
 
     public List<totalSalesByStatus> salesByStatusTotal(){
         return employeeRepository.salesStatusTotal();
+    }
+
+
+    public void send(String topicName, String value) {
+        var future = kafkaTemplate.send(topicName, value);
+        future.whenComplete((sendResult, exception) -> {
+            if (exception != null) {
+                future.completeExceptionally(exception);
+            } else {
+                future.complete(sendResult);
+            }
+
+        });
     }
 
 
