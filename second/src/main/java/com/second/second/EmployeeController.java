@@ -16,7 +16,6 @@ public class EmployeeController {
     private EmployeeService employeeService;
     private SalesRepository salesRepository;
 
-
     public EmployeeController(EmployeeRepository employeeRepository, EmployeeService employeeService, SalesRepository salesRepository){
         this.employeeRepository = employeeRepository;
         this.employeeService = employeeService;
@@ -111,6 +110,8 @@ public class EmployeeController {
     public List<Sales> allSalesWithStatus(@PathVariable String status){
         return salesRepository.findSalesByStatus(status);
     }
+
+
 
 
 }

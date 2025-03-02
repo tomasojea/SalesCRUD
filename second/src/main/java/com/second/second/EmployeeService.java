@@ -9,16 +9,14 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    private EmployeeRepository employeeRepository;
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private final EmployeeRepository employeeRepository;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 //    private Faker faker = new Faker();
 
     public EmployeeService(EmployeeRepository employeeRepository, KafkaTemplate<String, String> kafkaTemplate) {
         this.employeeRepository = employeeRepository;
         this.kafkaTemplate = kafkaTemplate;
     }
-
-
 
     public Integer totalSales(){
         return employeeRepository.totalSales().size();
@@ -38,15 +36,13 @@ public class EmployeeService {
 
 
     public void send(String topicName, String value) {
-        var future = kafkaTemplate.send(topicName, value);
-        future.whenComplete((sendResult, exception) -> {
-            if (exception != null) {
-                future.completeExceptionally(exception);
-            } else {
-                future.complete(sendResult);
-            }
+        try {
+            kafkaTemplate.send(topicName, value);
+            System.out.println("Message sent to topic: " + topicName);
+        } catch (Exception e) {
+            System.err.println("Error sending message: " + e.getMessage());
+        }
 
-        });
     }
 
 

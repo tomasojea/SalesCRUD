@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-interface EmployeeRepository extends CrudRepository<Employee,Integer>
+public interface EmployeeRepository extends CrudRepository<Employee,Integer>
 {
 
     public List<Employee> findAll();
