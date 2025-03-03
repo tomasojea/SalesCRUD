@@ -1,6 +1,7 @@
-package com.second.second;
+package com.second.second.employee;
 
-import com.github.javafaker.Faker;
+import com.second.second.sales.salesByStatusDTO;
+import com.second.second.sales.totalSalesByStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -18,22 +19,9 @@ public class EmployeeService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public Integer totalSales(){
-        return employeeRepository.totalSales().size();
-    }
-
     public String salesStatus(int id){
         return employeeRepository.findById(id).getSales().getFirst().getStatus();
     }
-
-    public List<salesByStatusDTO> salesByStatus(){
-        return employeeRepository.salesStatus();
-    }
-
-    public List<totalSalesByStatus> salesByStatusTotal(){
-        return employeeRepository.salesStatusTotal();
-    }
-
 
     public void send(String topicName, String value) {
         try {

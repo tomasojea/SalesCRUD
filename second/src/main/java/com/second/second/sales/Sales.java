@@ -1,8 +1,6 @@
-package com.second.second;
+package com.second.second.sales;
 
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 public class Sales {

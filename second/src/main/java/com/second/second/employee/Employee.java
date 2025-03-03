@@ -1,5 +1,6 @@
-package com.second.second;
+package com.second.second.employee;
 
+import com.second.second.sales.Sales;
 import jakarta.persistence.*;
 
 
