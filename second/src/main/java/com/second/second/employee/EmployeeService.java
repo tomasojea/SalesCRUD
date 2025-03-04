@@ -23,6 +23,22 @@ public class EmployeeService {
         return employeeRepository.findById(id).getSales().getFirst().getStatus();
     }
 
+    public List<Employee> findAll(){
+        return employeeRepository.findAll();
+    }
+
+    public Employee save(Employee employee){
+        return employeeRepository.save(employee);
+    }
+
+    public void deleteById(Integer id){
+         employeeRepository.deleteById(id);
+    }
+
+    public List<Employee> findByName(String name){
+        return employeeRepository.findByName(name);
+    }
+
     public void send(String topicName, String value) {
         try {
             kafkaTemplate.send(topicName, value);

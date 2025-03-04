@@ -10,11 +10,9 @@ import java.util.List;
 @RequestMapping("/")
 public class EmployeeController {
 
-    private final EmployeeRepository employeeRepository;
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeRepository employeeRepository, EmployeeService employeeService, SalesRepository salesRepository){
-        this.employeeRepository = employeeRepository;
+    public EmployeeController(EmployeeService employeeService){
         this.employeeService = employeeService;
     }
 
@@ -38,22 +36,22 @@ public class EmployeeController {
     @GetMapping("/allemployees")
     public List<Employee> allEmployess(){
         employeeService.send("quickstart-events","all employees");
-        return employeeRepository.findAll();
+        return employeeService.findAll();
     }
 
     @GetMapping("/allemployeeswith/{name}")
     public List<Employee> allEmployeesWith(@PathVariable String name){
-        return employeeRepository.findByName(name);
+        return employeeService.findByName(name);
     }
 
     @PostMapping("/addemployee")
     public Employee addEmployee(Employee employee){
-        return employeeRepository.save(employee);
+        return employeeService.save(employee);
     }
 
     @PostMapping("/deleteemployee")
     public String deleteEmployee(Integer id){
-         employeeRepository.deleteById(id);
+         employeeService.deleteById(id);
          return id + " was deleted";
     }
 

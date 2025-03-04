@@ -1,32 +1,25 @@
 package com.second.second.sales;
 
 
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
-import com.github.mustachejava.MustacheFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.StringWriter;
 import java.util.List;
 
 @RestController
 @RequestMapping("/sales")
 public class SalesController {
 
+    private final SalesRepository salesRepository;
+
     public SalesController(SalesRepository salesRepository) {
         this.salesRepository = salesRepository;
     }
 
-    private SalesRepository salesRepository;
-
     @GetMapping("/template")
     public String htmlTemplate(){
-
         return TemplateHelper.getTemplate(salesRepository.salesStatusTotal());
-
     }
 
     @GetMapping("/salewith/{id}")
