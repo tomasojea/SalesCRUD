@@ -1,23 +1,17 @@
 package com.second.second.employee;
 
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
-import com.github.mustachejava.MustacheFactory;
-import com.second.second.sales.Sales;
 import com.second.second.sales.SalesRepository;
-import com.second.second.sales.salesByStatusDTO;
-import com.second.second.sales.totalSalesByStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.StringWriter;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/")
 public class EmployeeController {
 
-    private EmployeeRepository employeeRepository;
-    private EmployeeService employeeService;
+    private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeRepository employeeRepository, EmployeeService employeeService, SalesRepository salesRepository){
         this.employeeRepository = employeeRepository;

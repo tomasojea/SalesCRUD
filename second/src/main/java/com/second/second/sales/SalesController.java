@@ -24,13 +24,9 @@ public class SalesController {
 
     @GetMapping("/template")
     public String htmlTemplate(){
-        MustacheFactory mf = new DefaultMustacheFactory();
-        Mustache mustache = mf.compile("C:/Users/Owner/Downloads/second/src/main/resources/template.html");
 
-        StringWriter writer = new StringWriter();
-        mustache.execute(writer, salesRepository.salesStatusTotal());
-        String html = writer.toString();
-        return html;
+        return TemplateHelper.getTemplate(salesRepository.salesStatusTotal());
+
     }
 
     @GetMapping("/salewith/{id}")
