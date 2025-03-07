@@ -1,8 +1,7 @@
 package com.second.second.employee;
 
-import com.second.second.sales.SalesRepository;
+import com.second.second.sales.Sales;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -56,8 +55,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/salesperemployee/{id}")
-    public String salesPerEmployee(@PathVariable int id){
-        return employeeService.salesStatus(id);
+    public List<Sales> salesPerEmployee(@PathVariable int id){
+        return employeeService.salesPerEmployee(id);
     }
 
 }

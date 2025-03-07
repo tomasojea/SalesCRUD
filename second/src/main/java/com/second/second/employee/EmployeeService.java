@@ -1,5 +1,6 @@
 package com.second.second.employee;
 
+import com.second.second.sales.Sales;
 import com.second.second.sales.salesByStatusDTO;
 import com.second.second.sales.totalSalesByStatus;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -21,6 +22,10 @@ public class EmployeeService {
 
     public String salesStatus(int id){
         return employeeRepository.findById(id).getSales().getFirst().getStatus();
+    }
+
+    public List<Sales> salesPerEmployee(int id){
+        return employeeRepository.findById(id).getSales();
     }
 
     public List<Employee> findAll(){
