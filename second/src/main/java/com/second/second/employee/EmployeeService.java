@@ -1,8 +1,6 @@
 package com.second.second.employee;
 
 import com.second.second.sales.Sales;
-import com.second.second.sales.salesByStatusDTO;
-import com.second.second.sales.totalSalesByStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
