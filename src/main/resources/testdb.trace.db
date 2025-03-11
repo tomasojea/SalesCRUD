@@ -1926,3 +1926,83 @@ select coalesce(sum(case when s1_0.billing_cycle='monthly' then s1_0.amount when
 2025-03-10 21:56:44.276797Z jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "SUSCRIPTION" not found; SQL statement:
 select coalesce(sum(case when s1_0.billing_cycle='monthly' then s1_0.amount when s1_0.billing_cycle='yearly' then (s1_0.amount/12) else 0 end),0) from suscription s1_0 where s1_0.status='active' [42102-224]
+2025-03-11 10:32:29.194281Z jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "USER_ID" not found; SQL statement:
+-- Insert subscriptions first
+INSERT INTO subscriptions (id, user_id, plan_name, start_date, end_date, billing_cycle, amount) VALUES
+(1, 101, 'Premium', '2024-01-01', '2025-01-01', 'yearly', 120.00),
+(2, 102, 'Basic', '2024-02-01', '2024-03-01', 'monthly', 10.00),
+(3, 103, 'Standard', '2024-03-01', '2025-03-01', 'yearly', 100.00),
+(4, 104, 'Premium', '2024-04-01', '2025-04-01', 'yearly', 150.00),
+(5, 105, 'Basic', '2024-05-01', '2024-06-01', 'monthly', 15.00),
+(6, 106, 'Standard', '2024-06-01', '2025-06-01', 'yearly', 90.00),
+(7, 107, 'Premium', '2024-07-01', '2025-07-01', 'yearly', 200.00),
+(8, 108, 'Basic', '2024-08-01', '2024-09-01', 'monthly', 20.00),
+(9, 109, 'Standard', '2024-09-01', '2025-09-01', 'yearly', 110.00),
+(10, 110, 'Premium', '2024-10-01', '2025-10-01', 'yearly', 180.00) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-03-11 10:45:44.939776Z jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO billing (subscription_id, bill_date)\000d\000aSELECT id, \000d\000a       CURRENT_DATE - INTERVAL [*]FLOOR(RAND() * 365) DAY  -- Random bill date within the last year\000d\000aFROM subscriptions\000d\000aORDER BY RAND()"; expected "-, +, string"; SQL statement:
+INSERT INTO billing (subscription_id, bill_date)
+SELECT id, 
+       CURRENT_DATE - INTERVAL FLOOR(RAND() * 365) DAY  -- Random bill date within the last year
+FROM subscriptions
+ORDER BY RAND() [42001-224]

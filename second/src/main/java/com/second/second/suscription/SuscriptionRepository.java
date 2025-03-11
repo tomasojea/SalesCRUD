@@ -16,7 +16,7 @@ public interface SuscriptionRepository extends CrudRepository<Subscriptions,Inte
         END
     ), 0) AS amount 
     FROM Subscriptions s WHERE s.status = 'active'
-""")
+    """)
     BigDecimal calculateMRR();
 
 }
