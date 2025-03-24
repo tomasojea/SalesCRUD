@@ -4,19 +4,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public interface SuscriptionRepository extends CrudRepository<Subscriptions,Integer> {
 
-    @Query("""
-    SELECT COALESCE(SUM(
-        CASE 
-            WHEN s.billing_cycle = 'monthly' THEN s.amount 
-            WHEN s.billing_cycle = 'yearly' THEN s.amount / 12 
-            ELSE 0 
-        END
-    ), 0) AS amount 
-    FROM Subscriptions s WHERE s.status = 'active'
-    """)
+    @Query(value = "SELECT total_mrr FROM mrr", nativeQuery = true)
     BigDecimal calculateMRR();
+    @Query(value = "SELECT division_result FROM revenue_churn", nativeQuery = true)
+    Double calculateChurn();
+
 
 }

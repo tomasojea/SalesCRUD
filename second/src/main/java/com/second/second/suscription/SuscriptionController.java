@@ -21,6 +21,11 @@ public class SuscriptionController {
         return suscriptionService.MRRCalc();
     }
 
+    @GetMapping("/churn")
+    public Double ChurnCalc(){
+        return suscriptionService.ChurnCalc();
+    }
+
 
 
 }
