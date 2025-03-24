@@ -16,14 +16,19 @@ public class SuscriptionController {
         this.suscriptionService = suscriptionService;
     }
 
-    @GetMapping("/calc")
+    @GetMapping("/mrrcalc")
     public BigDecimal MRRCalc(){
         return suscriptionService.MRRCalc();
     }
 
-    @GetMapping("/churn")
-    public Double ChurnCalc(){
-        return suscriptionService.ChurnCalc();
+    @GetMapping("/customerchurn")
+    public Double customerChurn(){
+        return suscriptionService.customerChurnCalc();
+    }
+
+    @GetMapping("/revenuechurn")
+    public Double revenueCalc(){
+        return suscriptionService.revenueChurnCalc();
     }
 
 

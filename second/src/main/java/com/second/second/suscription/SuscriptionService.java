@@ -18,8 +18,13 @@ public class SuscriptionService {
         return mrr ;
     }
 
-  public Double ChurnCalc(){
-     return suscriptionRepository.calculateChurn();
+  public Double customerChurnCalc(){
+     return suscriptionRepository.calculateCustomerChurn();
   }
+
+    public Double revenueChurnCalc(){
+        return suscriptionRepository.calculateRevenueChurn();
+    }
+
 
 }

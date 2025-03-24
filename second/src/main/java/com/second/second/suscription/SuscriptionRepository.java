@@ -11,7 +11,9 @@ public interface SuscriptionRepository extends CrudRepository<Subscriptions,Inte
     @Query(value = "SELECT total_mrr FROM mrr", nativeQuery = true)
     BigDecimal calculateMRR();
     @Query(value = "SELECT division_result FROM revenue_churn", nativeQuery = true)
-    Double calculateChurn();
+    Double calculateRevenueChurn();
+    @Query(value = "SELECT churn_rate FROM customer_churn", nativeQuery = true)
+    Double calculateCustomerChurn();
 
 
 }
