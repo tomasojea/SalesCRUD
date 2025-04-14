@@ -1,6 +1,7 @@
 package com.second.second.employee;
 
 import com.second.second.sales.Sales;
+import org.springframework.data.domain.Sort;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,10 @@ public class EmployeeService {
 
     public List<Employee> findAll(){
         return employeeRepository.findAll();
+    }
+
+    public List<Employee> findAll(Sort sort){
+        return employeeRepository.findAll(sort);
     }
 
     public Employee save(Employee employee){
