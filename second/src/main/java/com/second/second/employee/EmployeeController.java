@@ -2,13 +2,18 @@ package com.second.second.employee;
 
 import com.second.second.sales.Sales;
 import com.second.second.utils.MultipleSorts;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/")
@@ -22,7 +27,6 @@ public class EmployeeController {
         } else if (direction.equals("desc")) {
             return Sort.Direction.DESC;
         }
-
         return Sort.Direction.ASC;
     }
 
@@ -55,33 +59,39 @@ public class EmployeeController {
     }
     @CrossOrigin
     @GetMapping("/sortemployees")
-    public ResponseEntity<List<Employee>>  sortEmployees(@RequestParam("sort") String[] sort){
+    public ResponseEntity<Map<String, Object>>  sortEmployees(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam("sort") String[] sort){
         System.out.println("Sort: " + sort[0]);
         try {
-            List<Sort.Order> orders = new ArrayList<Sort.Order>();
-            System.out.println("orders: " + orders);
-            System.out.println(sort[0].contains("."));
+            List<Sort.Order> orders = new ArrayList<>();
             if (sort[0].contains(".")) {
                 // will sort more than 2 columns
                 for (String sortOrder : sort) {
                     // sortOrder="column, direction"
                     String[] _sort = sortOrder.split("\\.");
-                    System.out.println(_sort[0] +" "+ _sort[1]);
                     orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
                 }
-                System.out.println(" get first orders: " + orders.getFirst());
             } else {
                 // sort=[column, direction]
                 orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
             }
-            System.out.println("Sort orders: " + orders.getFirst());
-            List<Employee> employees = employeeService.findAll(Sort.by(orders));
-
+            List<Employee> employees = new ArrayList<>();
+            Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
+            Page<Employee> pageTuts;
+            pageTuts = employeeService.findAll(pagingSort);
+            employees =  pageTuts.getContent();
             if (employees.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            System.out.println("Sort orders: " + orders);
-            return new ResponseEntity<>(employees, HttpStatus.OK);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("employees", employees);
+            response.put("currentPage", pageTuts.getNumber());
+            response.put("totalItems", pageTuts.getTotalElements());
+            response.put("totalPages", pageTuts.getTotalPages());
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

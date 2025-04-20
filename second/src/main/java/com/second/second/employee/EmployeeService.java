@@ -1,6 +1,8 @@
 package com.second.second.employee;
 
 import com.second.second.sales.Sales;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,9 @@ public class EmployeeService {
 
     public List<Employee> findAll(Sort sort){
         return employeeRepository.findAll(sort);
+    }
+    public Page<Employee> findAll(Pageable pageable){
+        return employeeRepository.findAll(pageable);
     }
 
     public Employee save(Employee employee){
